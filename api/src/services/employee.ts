@@ -16,7 +16,9 @@ type EmployeeInput = {
   email?: string;
   age?: number;
   role?: string;
+  university?: string;
   location?: string;
+  address?: string;
 };
 
 const ensureEmployeeSchema = async () => {
@@ -35,7 +37,7 @@ export const getAllEmployeesService = async () => {
 };
 
 export const createEmployeeService = async (employee: EmployeeInput) => {
-  const { name, email, age, role, location } = employee;
+  const { name, email, age, role, university, location, address } = employee;
 
   if (!name || !email || age === undefined || age === null) {
     throw createError(400, "Name, email, and age are required");
@@ -46,7 +48,9 @@ export const createEmployeeService = async (employee: EmployeeInput) => {
     email,
     age,
     role,
+    university,
     location,
+    address,
   ]);
   return data.rows[0];
 };
@@ -64,14 +68,16 @@ export const updateEmployeeService = async (
   id: string,
   employee: EmployeeInput,
 ) => {
-  const { name, email, age, role, location } = employee;
+  const { name, email, age, role, university, location, address } = employee;
 
   const { rows } = await query(updateEmployeeQuery, [
     name,
     email,
     age,
     role,
+    university,
     location,
+    address,
     id,
   ]);
 

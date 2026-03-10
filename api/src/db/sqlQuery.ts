@@ -15,7 +15,9 @@ export const createEmployeeTableQuery = `
         email VARCHAR(255) NOT NULL UNIQUE,
         age SMALLINT NOT NULL CHECK (age > 17),
         role role_type NOT NULL DEFAULT 'Other',
+        university VARCHAR(255) NOT NULL DEFAULT '',
         location location_type NOT NULL DEFAULT 'Onsite',
+        address TEXT NOT NULL DEFAULT '',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
@@ -24,8 +26,16 @@ export const createEmployeeTableQuery = `
 export const getAllEmployeesQuery = `SELECT * FROM employee_details;`;
 
 export const createEmployeeQuery = `
-    INSERT INTO employee_details (name, email, age, role, location)
-    VALUES ($1, $2, $3, COALESCE($4::role_type, 'Other' ::role_type), COALESCE($5::location_type, 'Onsite' ::location_type))
+    INSERT INTO employee_details (name, email, age, role, university, location, address)
+    VALUES (
+        $1,
+        $2,
+        $3,
+        COALESCE($4::role_type, 'Other'::role_type),
+        COALESCE($5, ''),
+        COALESCE($6::location_type, 'Onsite'::location_type),
+        COALESCE($7, '')
+    )
     RETURNING *;
 `;
 
@@ -37,9 +47,11 @@ export const updateEmployeeQuery = `
         email = COALESCE($2, email),
         age = COALESCE($3, age),
         role = COALESCE($4::role_type, role),
-        location = COALESCE($5::location_type, location),
+        university = COALESCE($5, university),
+        location = COALESCE($6::location_type, location),
+        address = COALESCE($7, address),
         updated_at = CURRENT_TIMESTAMP
-    WHERE id = $6
+    WHERE id = $8
     RETURNING *;
 `;
 

@@ -2,6 +2,15 @@ import { Request, Response, NextFunction } from "express";
 import { EmployeeService } from "../services/employee";
 
 type EmployeeParams = { id: string };
+type EmployeeBody = {
+  name?: string;
+  email?: string;
+  age?: number;
+  role?: string;
+  university?: string;
+  location?: string;
+  address?: string;
+};
 
 export const getAllEmployees = async (
   req: Request,
@@ -17,7 +26,7 @@ export const getAllEmployees = async (
 };
 
 export const createEmployee = async (
-  req: Request,
+  req: Request<Record<string, never>, unknown, EmployeeBody>,
   res: Response,
   next: NextFunction,
 ) => {
@@ -43,7 +52,7 @@ export const getEmployee = async (
 };
 
 export const updateEmployee = async (
-  req: Request<EmployeeParams>,
+  req: Request<EmployeeParams, unknown, EmployeeBody>,
   res: Response,
   next: NextFunction,
 ) => {

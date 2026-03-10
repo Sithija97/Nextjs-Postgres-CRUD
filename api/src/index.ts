@@ -8,7 +8,7 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 const corsOptions = {
   origin: "*", // Allow all origins (for development purposes)
