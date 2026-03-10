@@ -1,4 +1,3 @@
-import { getAllEmployees } from "./../controllers/employee";
 export const createRoleQuery = `
     CREATE TYPE role_type AS
     ENUM ('Manager', 'Developer', 'HR', 'Sales', 'Marketing', 'Intern', 'Other');
