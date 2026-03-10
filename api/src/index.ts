@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import "./db/dbConnection.js"; // Import to initialize DB connection
-import employeeRoute from "./routes/employee.js"; // Import to initialize routes
+import customerRoute from "./routes/customer.js"; // Import customer routes
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 dotenv.config();
@@ -19,10 +19,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Welcome to your TypeScript API" });
+  res.json({
+    message: "Customer Management API",
+    version: "1.0.0",
+    endpoints: {
+      customers: "/api/customers",
+    },
+  });
 });
 
-app.use("/api/employees", employeeRoute);
+app.use("/api/customers", customerRoute);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({
