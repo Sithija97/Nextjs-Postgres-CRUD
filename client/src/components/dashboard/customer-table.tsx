@@ -184,7 +184,9 @@ export function CustomerTable({
               }}
             />
           </div>
-          <Button onClick={onAdd}>Add new account</Button>
+          <Button variant={"outline"} onClick={onAdd}>
+            Add new account
+          </Button>
         </div>
       </CardHeader>
       <CardContent

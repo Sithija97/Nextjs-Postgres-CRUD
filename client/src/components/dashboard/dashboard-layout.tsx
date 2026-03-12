@@ -103,13 +103,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             );
           })}
         </nav>
-
-        <div className="mt-10 rounded-2xl border border-border/60 bg-card/70 p-4">
-          <p className="text-sm font-medium">Deployment-ready structure</p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            UI mirrors a modern CRM dashboard and is ready for API wiring later.
-          </p>
-        </div>
       </aside>
 
       <div className="md:pl-60">
